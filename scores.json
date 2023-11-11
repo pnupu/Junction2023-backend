@@ -1,40 +1,44 @@
 {
-    "users": [
-      {
-        "id": "f7454921-a65c-4885-bec2-e3ffb049a45b",
-        "username": "Ilkka",
-        "email": "ilkka.lappetelainen@gmail.com",
-        "phoneNumber": "534-857-3707x33004",
-        "highScore": 548
-      },
-      {
-        "id": "22970d41-ccf8-42d1-b2d3-66e9a70105fe",
-        "username": "Aleksi",
-        "email": "aleksi.pietarinen@gmail.com",
-        "phoneNumber": "(223)640-5807x98770",
-        "highScore": 321
-      },
-      {
-        "id": "5dc7a5dc-7b5a-4f3c-8117-d0810e6953c1",
-        "username": "Martynas",
-        "email": "MartynasKrupskis@gmail.com",
-        "phoneNumber": "898-496-6514",
-        "highScore": 221
-      },
-      {
-        "id": "c2e5dcdc-93a4-49fe-b806-e190d921640a",
-        "username": "Calvin",
-        "email": "otewa.calvin@gmail.com",
-        "phoneNumber": "(238)257-9024",
-        "highScore": 325
-      },
-      {
-        "id": "e03df821-5e6b-41bb-9740-d3fb34edf0a5",
-        "username": "Rokas",
-        "email": "rokasjrokas@gmail.com",
-        "phoneNumber": "406-314-0716x718",
-        "highScore": 170
-      }
-    ]
-  }
-  
+  "users": [
+    {
+      "id": "f7454921-a65c-4885-bec2-e3ffb049a45b",
+      "username": "Ilkka",
+      "email": "ilkka.lappetelainen@gmail.com",
+      "phoneNumber": "534-857-3707x33004",
+      "highScore": 548
+    },
+    {
+      "id": "22970d41-ccf8-42d1-b2d3-66e9a70105fe",
+      "username": "Aleksi",
+      "email": "aleksi.pietarinen@gmail.com",
+      "phoneNumber": "(223)640-5807x98770",
+      "highScore": 321
+    },
+    {
+      "id": "5dc7a5dc-7b5a-4f3c-8117-d0810e6953c1",
+      "username": "Martynas",
+      "email": "MartynasKrupskis@gmail.com",
+      "phoneNumber": "898-496-6514",
+      "highScore": 221
+    },
+    {
+      "id": "c2e5dcdc-93a4-49fe-b806-e190d921640a",
+      "username": "Calvin",
+      "email": "otewa.calvin@gmail.com",
+      "phoneNumber": "(238)257-9024",
+      "highScore": 325
+    },
+    {
+      "id": "e03df821-5e6b-41bb-9740-d3fb34edf0a5",
+      "username": "Rokas",
+      "email": "rokasjrokas@gmail.com",
+      "phoneNumber": "406-314-0716x718",
+      "highScore": 170
+    },
+    {
+      "id": "fcaad891-d162-4188-a212-de017c8844b8",
+      "username": "newUser123",
+      "phoneNumber": "123-456-7890"
+    }
+  ]
+}

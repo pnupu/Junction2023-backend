@@ -44,6 +44,7 @@ app.post('/users', (req, res) => {
     id: uuidv4(),
     username: req.body.username,
     phoneNumber: req.body.phoneNumber,
+    highScore: req.body.highScore || 0
   };
   data.users.push(newUser);
   writeData(data);

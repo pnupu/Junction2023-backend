@@ -1,65 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Player Highscores</title>
-<style>
-  /* Add your styling here */
-  .highscore-container {
-    width: 100%;
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    background: #f7f7f7;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  .highscore-entry {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    padding: 10px;
-    background: #ffffff;
-    border-radius: 4px;
-  }
-  .highscore-entry:nth-child(odd) {
-    background: #efefef;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Highscores</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .highscore-container {
+      background: #f7f7f7;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .highscore-entry {
+      background: #ffffff;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .highscore-entry:nth-child(odd) {
+      background: #efefef;
+    }
+    .stars {
+      color: gold;
+      font-size: 1.5em;
+    }
+    .score {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    .highscore-title {
+      text-align: center;
+      padding: 20px;
+      font-size: 2em;
+      color: #333;
+    }
+  </style>
+  <!-- Font Awesome for star icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 <body>
 
-<div class="highscore-container" id="highscoreList">
-  <!-- Highscores will be inserted here -->
+<div class="container py-4">
+  <h1 class="highscore-title">High Scores</h1>
+  <div class="highscore-container mx-auto" id="highscoreList">
+    <!-- Highscores will be inserted here -->
+  </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.3.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Assuming you have an endpoint to fetch high scores
-  const highScoresEndpoint = 'http://94.237.117.126:3000/highscores';
-
-  fetch(highScoresEndpoint)
+document.addEventListener('DOMContentLoaded', function() {  
+  fetch('https://server.getpawlie.com/highscores')
     .then(response => response.json())
     .then(data => {
-      const highscoreList = document.getElementById('highscoreList');
-      highscoreList.innerHTML = ''; // Clear existing entries
 
-      data.forEach(player => {
-        const entry = document.createElement('div');
-        entry.className = 'highscore-entry';
-        entry.innerHTML = `
-          <div class="username">${player.username}</div>
-          <div class="highScore">${player.highScore}</div>
-        `;
-        highscoreList.appendChild(entry);
-      });
-    })
-    .catch(error => {
-      console.error('Error fetching high scores:', error);
+    function generateStars(score) {
+      const maxScore = 548; // Replace with the actual max score for 3 stars
+      const starRating = Math.ceil((score / maxScore) * 3);
+      let stars = '';
+      for (let i = 0; i < 3; i++) {
+        stars += i < starRating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
+      }
+      return stars;
+    }
+
+    const highscoreList = document.getElementById('highscoreList');
+    highscoreList.innerHTML = ''; // Clear existing entries
+
+    data.forEach(player => {
+      const entry = document.createElement('div');
+      entry.className = 'highscore-entry p-3 d-flex justify-content-between align-items-center';
+      const stars = generateStars(player.highScore);
+      entry.innerHTML = `
+        <div class="username">${player.username}</div>
+        <div class="d-flex align-items-center">
+          <div class="score">${player.highScore}</div>
+          <div class="stars">${stars}</div>
+        </div>
+      `;
+      highscoreList.appendChild(entry);
     });
+  })
+  .catch(error => {
+    console.error('Error fetching high scores:', error);
+  });
 });
-
 </script>
 
 </body>
