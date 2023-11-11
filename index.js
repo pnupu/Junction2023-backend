@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
+const https = require('https');
 const fs = require('fs');
 
 const app = express();
@@ -9,6 +10,11 @@ app.use(cors()); // use cors middleware with default options, allowing all origi
 app.use(bodyParser.json());
 
 const dataFile = 'scores.json';
+
+const options = {
+    key: fs.readFileSync('/etc/letsencrypt/live/server.getpawlie.com/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/server.getpawlie.com/fullchain.pem')
+};
 
 // Helper function to read the data file
 function readData() {
@@ -56,10 +62,6 @@ app.put('/users/:id/score', (req, res) => {
   res.send(user);
 });
 
-  
-
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+https.createServer(options, app).listen(443, () => {
+    console.log('Express server listening on port 443');
 });
