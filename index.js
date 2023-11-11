@@ -25,6 +25,8 @@ function writeData(data) {
 // Route to get the high scores
 app.get('/highscores', (req, res) => {
   const data = readData();
+  //Remove users with no high score
+  data.users = data.users.filter(u => u.highScore);
   data.users.sort((a, b) => b.highScore - a.highScore);
   res.json(data.users);
 });
@@ -35,9 +37,7 @@ app.post('/users', (req, res) => {
   const newUser = {
     id: uuidv4(),
     username: req.body.username,
-    email: req.body.email,
     phoneNumber: req.body.phoneNumber,
-    highScore: req.body.highScore
   };
   data.users.push(newUser);
   writeData(data);
