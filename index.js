@@ -28,40 +28,62 @@ function writeData(data) {
   fs.writeFileSync(dataFile, jsonData);
 }
 
-// Route to get the high scores
-app.get('/highscores', (req, res) => {
-  const data = readData();
-  //Remove users with no high score
-  data.users = data.users.filter(u => u.highScore);
-  data.users.sort((a, b) => b.highScore - a.highScore);
-  res.json(data.users);
-});
 
-// Route to create a user
-app.post('/users', (req, res) => {
-  const data = readData();
-  const newUser = {
-    id: uuidv4(),
-    username: req.body.username,
-    phoneNumber: req.body.phoneNumber,
-    highScore: req.body.highScore || 0
-  };
-  data.users.push(newUser);
-  writeData(data);
-  res.status(201).send(newUser);
-});
-
-// Route to update a user's high score
-app.put('/users/:id/score', (req, res) => {
-  const data = readData();
-  const user = data.users.find(u => u.id === req.params.id); // compare as strings
-  if (!user) {
-    return res.status(404).send('User not found.');
+// Helper function to update high scores for a user
+function updateHighScores(userScores, newScores) {
+    const updatedScores = { ...userScores };
+    Object.keys(newScores).forEach(game => {
+      updatedScores[game] = Math.max(updatedScores[game] || 0, newScores[game]);
+    });
+    return updatedScores;
   }
-  user.highScore = Math.max(user.highScore, req.body.highScore);
-  writeData(data);
-  res.send(user);
-});
+  
+  // Route to get the high scores
+  app.get('/highscores', (req, res) => {
+    const data = readData();
+    // Create a list of users with their highest scores for each game and a total score
+    const highScoresPerGame = data.users.map(u => {
+      // Calculate the total score by summing the high scores for each game
+      const totalScore = Object.values(u.highScores).reduce((acc, score) => acc + score, 0);
+      return {
+        username: u.username,
+        highScores: u.highScores,
+        totalScore: totalScore  // Add the total score to the response
+      };
+    });
+    // You might want to sort the users by their total score before sending the response
+    highScoresPerGame.sort((a, b) => b.totalScore - a.totalScore);
+    res.json(highScoresPerGame);
+  });
+  
+  // Route to create a user with initial high scores for each game
+  app.post('/users', (req, res) => {
+    const data = readData();
+    const newUser = {
+      id: uuidv4(),
+      username: req.body.username,
+      phoneNumber: req.body.phoneNumber,
+      highScores: req.body.highScores || { game1: 0, game2: 0, game3: 0 }
+    };
+    data.users.push(newUser);
+    writeData(data);
+    res.status(201).send(newUser);
+  });
+  
+  // Route to update a user's high score for a specific game
+  app.put('/users/:id/score', (req, res) => {
+    const data = readData();
+    const user = data.users.find(u => u.id === req.params.id);
+    if (!user) {
+      return res.status(404).send('User not found.');
+    }
+    user.highScores = updateHighScores(user.highScores, req.body.highScores);
+    writeData(data);
+    res.send(user);
+  });
+  
+  // ...
+  
 
 https.createServer(options, app).listen(443, () => {
     console.log('Express server listening on port 443');
