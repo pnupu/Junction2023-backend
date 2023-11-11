@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
 
 const app = express();
+app.use(cors()); // use cors middleware with default options, allowing all origins
 app.use(bodyParser.json());
 
 const dataFile = 'scores.json';
@@ -45,7 +47,7 @@ app.post('/users', (req, res) => {
 // Route to update a user's high score
 app.put('/users/:id/score', (req, res) => {
   const data = readData();
-  const user = data.users.find(u => u.id === parseInt(req.params.id));
+  const user = data.users.find(u => u.id === req.params.id); // compare as strings
   if (!user) {
     return res.status(404).send('User not found.');
   }
@@ -53,6 +55,8 @@ app.put('/users/:id/score', (req, res) => {
   writeData(data);
   res.send(user);
 });
+
+  
 
 // Start the server
 const PORT = process.env.PORT || 3000;

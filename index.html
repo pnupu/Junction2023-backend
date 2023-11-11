@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Player Highscores</title>
+<style>
+  /* Add your styling here */
+  .highscore-container {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .highscore-entry {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #ffffff;
+    border-radius: 4px;
+  }
+  .highscore-entry:nth-child(odd) {
+    background: #efefef;
+  }
+</style>
+</head>
+<body>
+
+<div class="highscore-container" id="highscoreList">
+  <!-- Highscores will be inserted here -->
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Assuming you have an endpoint to fetch high scores
+  const highScoresEndpoint = 'http://94.237.117.126:3000/highscores';
+
+  fetch(highScoresEndpoint)
+    .then(response => response.json())
+    .then(data => {
+      const highscoreList = document.getElementById('highscoreList');
+      highscoreList.innerHTML = ''; // Clear existing entries
+
+      data.forEach(player => {
+        const entry = document.createElement('div');
+        entry.className = 'highscore-entry';
+        entry.innerHTML = `
+          <div class="username">${player.username}</div>
+          <div class="highScore">${player.highScore}</div>
+        `;
+        highscoreList.appendChild(entry);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching high scores:', error);
+    });
+});
+
+</script>
+
+</body>
+</html>
