@@ -82,9 +82,7 @@ function updateHighScores(userScores, newScores) {
     res.send(user);
   });
   
-  // ...
-  
 
-https.createServer(options, app).listen(443, () => {
+https.createServer(options, app).listen(8080, () => {
     console.log('Express server listening on port 443');
 });

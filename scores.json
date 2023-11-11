@@ -5,35 +5,35 @@
       "username": "Ilkka",
       "email": "ilkka.lappetelainen@gmail.com",
       "phoneNumber": "534-857-3707x33004",
-      "highScore": { "game1": 1, "game2": 1, "game3": 1 }
+      "highScores": { "game1": 1, "game2": 1, "game3": 1 }
     },
     {
       "id": "22970d41-ccf8-42d1-b2d3-66e9a70105fe",
       "username": "Aleksi",
       "email": "aleksi.pietarinen@gmail.com",
       "phoneNumber": "(223)640-5807x98770",
-      "highScore": { "game1": 2, "game2": 2, "game3": 2 }
+      "highScores": { "game1": 2, "game2": 2, "game3": 2 }
     },
     {
       "id": "5dc7a5dc-7b5a-4f3c-8117-d0810e6953c1",
       "username": "Martynas",
       "email": "MartynasKrupskis@gmail.com",
       "phoneNumber": "898-496-6514",
-      "highScore": { "game1": 3, "game2": 3, "game3": 3 }
+      "highScores": { "game1": 3, "game2": 3, "game3": 3 }
     },
     {
       "id": "c2e5dcdc-93a4-49fe-b806-e190d921640a",
       "username": "Calvin",
       "email": "otewa.calvin@gmail.com",
       "phoneNumber": "(238)257-9024",
-      "highScore": { "game1": 4, "game2": 4, "game3": 4 }
+      "highScores": { "game1": 4, "game2": 4, "game3": 4 }
     },
     {
       "id": "e03df841-5e6b-41bb-9740-d3fb34edf0a5",
       "username": "Rokas",
       "email": "rokasjrokas@gmail.com",
       "phoneNumber": "406-314-0716x718",
-      "highScore": { "game1": 5, "game2": 5, "game3": 5 }
+      "highScores": { "game1": 5, "game2": 5, "game3": 5 }
     }
   ]
 }
