@@ -63,6 +63,7 @@ function updateHighScores(userScores, newScores) {
       id: uuidv4(),
       username: req.body.username,
       phoneNumber: req.body.phoneNumber,
+      localimageurl: req.body.localimageurl,
       highScores: req.body.highScores || { game1: 0, game2: 0, game3: 0 }
     };
     data.users.push(newUser);
