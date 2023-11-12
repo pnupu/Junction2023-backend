@@ -41,21 +41,20 @@ function updateHighScores(userScores, newScores) {
   // Route to get the high scores
   app.get('/highscores', (req, res) => {
     const data = readData();
-    // Create a list of users with their highest scores for each game and a total score
     const highScoresPerGame = data.users.map(u => {
-      // Calculate the total score by summing the high scores for each game
       const totalScore = Object.values(u.highScores).reduce((acc, score) => acc + score, 0);
       return {
         username: u.username,
         highScores: u.highScores,
-        totalScore: totalScore,  // Add the total score to the response
+        totalScore: totalScore,
         localimageurl: u.localimageurl
       };
-    });
-    // You might want to sort the users by their total score before sending the response
+    }).filter(u => u.totalScore > 0); // Add a filter to exclude users with a total score of 0
+  
     highScoresPerGame.sort((a, b) => b.totalScore - a.totalScore);
     res.json(highScoresPerGame);
   });
+  
   
   // Route to create a user with initial high scores for each game
   app.post('/users', (req, res) => {
