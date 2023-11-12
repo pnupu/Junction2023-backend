@@ -83,7 +83,16 @@ function updateHighScores(userScores, newScores) {
     res.send(user);
   });
   
+  app.get('/users/phone/:phoneNumber', (req, res) => {
+    const data = readData();
+    const user = data.users.find(u => u.phoneNumber === req.params.phoneNumber);
+    if (!user) {
+      return res.status(404).send('User not found.');
+    }
+    res.json(user);
+  });
 
+  
 https.createServer(options, app).listen(443, () => {
     console.log('Express server listening on port 443');
 });
