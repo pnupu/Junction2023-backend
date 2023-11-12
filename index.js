@@ -48,7 +48,8 @@ function updateHighScores(userScores, newScores) {
       return {
         username: u.username,
         highScores: u.highScores,
-        totalScore: totalScore  // Add the total score to the response
+        totalScore: totalScore,  // Add the total score to the response
+        localimageurl: u.localimageurl
       };
     });
     // You might want to sort the users by their total score before sending the response
