@@ -16,6 +16,7 @@ const options = {
     cert: fs.readFileSync('/etc/letsencrypt/live/server.getpawlie.com/fullchain.pem')
 };
 
+console.log(options)
 // Helper function to read the data file
 function readData() {
   const data = fs.readFileSync(dataFile);
@@ -92,7 +93,7 @@ function updateHighScores(userScores, newScores) {
     res.json(user);
   });
 
-  
+
 https.createServer(options, app).listen(443, () => {
     console.log('Express server listening on port 443');
 });
